@@ -1,0 +1,60 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{4}{c}}
+\toprule
+                &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}\\
+                &\multicolumn{1}{c}{Log crime rate}&\multicolumn{1}{c}{Log crime rate}&\multicolumn{1}{c}{Log crime rate}&\multicolumn{1}{c}{Log crime rate}\\
+\midrule
+~~k = -1 $\times$ Exposure&   0.0000         &   0.0000         &   0.0000         &   0.0000         \\
+                &      (.)         &      (.)         &      (.)         &      (.)         \\
+\addlinespace
+~~k = 0 $\times$ Exposure&  -0.0102\sym{*}  &  -0.0036         &  -0.0066         &  -0.0116         \\
+                & (0.0048)         & (0.0049)         & (0.0056)         & (0.0066)         \\
+\addlinespace
+~~k = 1 $\times$ Exposure&  -0.0222\sym{**} &  -0.0139         &  -0.0174         &  -0.0184         \\
+                & (0.0065)         & (0.0073)         & (0.0092)         & (0.0094)         \\
+\addlinespace
+~~k = 2 $\times$ Exposure&  -0.0374\sym{***}&  -0.0265\sym{**} &  -0.0317\sym{***}&  -0.0196\sym{**} \\
+                & (0.0076)         & (0.0084)         & (0.0063)         & (0.0071)         \\
+\addlinespace
+~~k = 3 $\times$ Exposure&  -0.0311\sym{***}&  -0.0243\sym{**} &  -0.0319\sym{***}&  -0.0317\sym{**} \\
+                & (0.0080)         & (0.0081)         & (0.0092)         & (0.0103)         \\
+\addlinespace
+~~k = 4 $\times$ Exposure&  -0.0174         &  -0.0114         &  -0.0193         &  -0.0252\sym{*}  \\
+                & (0.0141)         & (0.0117)         & (0.0098)         & (0.0096)         \\
+\addlinespace
+~~k = 5 $\times$ Exposure&  -0.0146         &  -0.0082         &  -0.0201         &  -0.0109         \\
+                & (0.0139)         & (0.0108)         & (0.0130)         & (0.0130)         \\
+\addlinespace
+~~k = 6 $\times$ Exposure&  -0.0059         &   0.0026         &  -0.0099         &  -0.0015         \\
+                & (0.0129)         & (0.0128)         & (0.0161)         & (0.0147)         \\
+\addlinespace
+~~k = 7 $\times$ Exposure&   0.0096         &   0.0324         &  -0.0042         &  -0.0038         \\
+                & (0.0159)         & (0.0211)         & (0.0183)         & (0.0199)         \\
+\addlinespace
+Exposure        &  -0.0010         &   0.0033         &  -0.0021         &  -0.0031         \\
+                & (0.0103)         & (0.0093)         & (0.0080)         & (0.0080)         \\
+\addlinespace
+Controls        &     {No}         &    {Yes}         &    {Yes}         &    {Yes}         \\
+\addlinespace
+Linear baseline interaction &     {No}         &     {No}         &    {Yes}         &     {No}         \\
+\addlinespace
+Full baseline interaction&     {No}         &     {No}         &     {No}         &    {Yes}         \\
+\addlinespace
+year            &    {Yes}         &    {Yes}         &    {Yes}         &    {Yes}         \\
+\addlinespace
+id              &    {Yes}         &    {Yes}         &    {Yes}         &    {Yes}         \\
+\addlinespace
+year#c.avghsngsocial&     {No}         &     {No}         &     {No}         &    {Yes}         \\
+\addlinespace
+year#c.avgjobpopratio&     {No}         &     {No}         &     {No}         &    {Yes}         \\
+\midrule
+Observations    & 1104.000         & 1104.000         & 1088.000         & 1088.000         \\
+\(R^{2}\)       &    0.953         &    0.958         &    0.966         &    0.970         \\
+Adjusted \(R^{2}\)&    0.948         &    0.954         &    0.963         &    0.965         \\
+Within \(R^{2}\)&    0.034         &    0.148         &    0.146         &    0.079         \\
+\bottomrule
+\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+}
