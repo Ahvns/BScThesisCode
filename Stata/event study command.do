@@ -3,9 +3,9 @@ capture program drop eventstudy
 
 quietly program eventstudy
 
-	syntax varname(numeric), ///
+	syntax varname(numeric fv ts), ///
 	TREATment(varname) Time(varname) Group(varname) ///
-	[ FE(varlist) INTeract(varlist fv ts) COVariates(varlist) STOre(name) TRend(varlist) TImeinteract(varlist) RESiduals PLOT(name) IW DEV BINs KEEP FULLINTeract NOANTicipation]
+	[ FE(varlist fv ts) INTeract(varlist fv ts) COVariates(varlist fv ts) STOre(name) TRend(varlist fv ts) TImeinteract(varlist fv ts) RESiduals PLOT(name) IW DEV BINs KEEP FULLINTeract NOANTicipation NOCLUSTER]
 
 	quietly {
 		gen cohort			= `treatment'
@@ -183,25 +183,27 @@ quietly program eventstudy
 
 
 	// regression
+	if "`nocluster'" != "" {
+		local cluster ""
+	}
+	else {
+	    local cluster "vce(cluster `group')"
+	}
 	qui xtset `group' `time'
-	reghdfe `varlist' `interactions' `covars', absorb(`fixedeffects') vce(cluster `group')
+	if "`residuals'" != "" {
+		reghdfe `varlist' `interactions' `covars', absorb(`fixedeffects') `cluster' res(res)
+		predict yhatd, xbd
+		predict yhat, xb
+		predict d, d
+	}
+	else {
+		reghdfe `varlist' `interactions' `covars', absorb(`fixedeffects') `cluster'
+	}
+
 
 	// store estimates
 	if "`store'" != "" {
 		eststo `store'
-	}
-
-	// Residuals option
-	if "`residuals'" 		!= "" {
-		predict yhat
-		gen res 			= yhat - `varlist'
-		lab var res "Residuals"
-		scatter yhat `varlist', name("prediction_error", replace)
-		scatter res `varlist', name("standardised_prediction_error", replace)
-		histogram res, name("residual_frequencies", replace)
-		if "`keep'" == "" {
-			drop yhat res
-		}
 	}
 
 	// plot coefficient grpahs

@@ -215,7 +215,7 @@ disp "merged neighbourhoods to match Wijkprofiel data"
 qui merge 1:1 id using "datasets\popvest.dta"
 qui reshape long crime pop vest fset emi femi school, i(id) j(year)
 drop vest-_merge
-qui replace crime = 0 if crime==.
+qui replace crime = 0 if crime==. & year >2004
 qui gen crimer = crime / (pop) * 1000
 disp "calculated crime rate per neighbourhood"
 drop pop
@@ -260,5 +260,5 @@ sort area id year
 qui replace treatment = 0 if treatment==.
 label define cohorts 0 "untreated"
 label values treatment cohorts
-//qui keep area-type avghsngsocial avgfset //comment out for all time invariant covars
+qui keep area-type avghsngsocial avgfset avginclow avgjobpopratio avgstudents avgbldfuncliving //comment out for all time invariant covars
 save "datasets\sample.dta", replace
